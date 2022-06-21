@@ -40,7 +40,7 @@ module "vpn_gateway_connection_map" {
 ##############################################################################
 
 resource "ibm_is_vpn_gateway_connection" "gateway_connection" {
-  for_each       = var.vpn_gateway.use_vpn_gateway && var.vpn_gateway.connections != null ? module.vpn_gateway_connection_map.value : {}
+  for_each       = var.vpn_gateway.use_vpn_gateway == true && var.vpn_gateway.connections != null ? module.vpn_gateway_connection_map.value : {}
   name           = each.value.name
   vpn_gateway    = ibm_is_vpn_gateway.gateway[0].id
   peer_address   = each.value.peer_address
