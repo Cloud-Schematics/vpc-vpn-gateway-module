@@ -53,7 +53,7 @@ variable "vpn_gateway" {
     use_vpn_gateway = bool             # create vpn gateway
     name            = optional(string) # gateway name
     mode            = optional(string) # Can be `route` or `policy`. Default is `route`
-    connections = list(
+    connections = optional(list(
       object({
         peer_address   = string
         preshared_key  = string
@@ -61,7 +61,7 @@ variable "vpn_gateway" {
         peer_cidrs     = optional(list(string))
         admin_state_up = optional(bool)
       })
-    )
+    ))
   })
 
   default = {

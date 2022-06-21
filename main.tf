@@ -25,7 +25,7 @@ resource "ibm_is_vpn_gateway" "gateway" {
 module "vpn_gateway_connection_map" {
   source = "./list_to_map"
   list = [
-    for connection in var.vpn_gateway.connections :
+    for connection in (var.vpn_gateway.connections == null ? [] : var.vpn_gateway.connections):
     merge(connection, {
       name = "${var.prefix}-${var.vpn_gateway.name}-${index(var.vpn_gateway.connections, connection) + 1}"
     })
